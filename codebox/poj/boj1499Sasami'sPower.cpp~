@@ -1,0 +1,31 @@
+#include<iostream>
+#include<math.h>
+#include<limits>
+using namespace std;
+int num[200000];
+struct node{
+  double l;
+  double r;
+}rag[200000];
+int main(){
+  int T;
+  cin>>T;
+  while(T--){
+    int n;
+    for(int i=0;i<n;i++){
+      scanf("%d",&num[i]);
+    }
+    rag[0].l=INT_MIN;
+    rag[0].r=1.0*num[0]/2;
+    for(int i=1;i<n;i++){
+      rag[i].l=1.0*num[i-1]/2;
+      rag[i].r=min(1.0*num[i]/2,1.0*num[i]/2-rang[i-1].l);
+    }
+    int imin=INT_MAX;
+    for(int i=0;i<n;i++)
+      imin=min(floor(rag[i].r)-ceil(rag[i].l)+1);
+    printf("%d\n",imin);
+  }
+
+  return 1;
+}

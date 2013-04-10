@@ -1,0 +1,68 @@
+#include<iostream>
+#include<stdio.h>
+#include<string.h>
+using namespace std;
+char str1[1000000+10];
+char str2[1000000+10];
+int next[1000000+10];
+
+void get_next(char*s){
+  next[0]=-1;
+  next[1]=0;
+  int n=strlen(s);
+  int j=0;
+  for(int i=2;i<=n;i++){
+    while(j>0&&s[j]!=s[i-1])
+      j=next[j];
+    if(s[j]==s[i-1])
+      j++;
+    next[i]=j;
+  }
+}
+int kmp(char *t,char *s){
+  get_next(s);
+  int n=strlen(t);
+  int j=1;
+  int ns=strlen(s);
+  if(ns==1||t[0]!=s[0])
+    return 0;
+  int count=1;
+  int out=0;
+  for(int i=1;i<n;i++){
+    while(j>0&&t[i]!=s[j]||j>=ns)
+      j=next[j];
+    if(j==0){
+      return out;
+    }
+    if(t[i]==s[j]){
+      count++;
+      j++;
+    }
+    if(j>=ns){
+      out+=count;
+      count=0;
+    }
+  }
+  return out;
+}
+int main(){
+  //#ifdef _DEBUG
+  freopen("data","r",stdin);
+  //#endif
+  int T;
+  cin>>T;
+  while(T--){
+    scanf("%s",&str1);
+    scanf("%s",&str2);
+    cout<<kmp(str1,str2)<<endl;
+
+  }
+  //#ifdef _DEBUG
+  freopen("CON","r",stdin);
+  // system("pause");
+  //#endif
+  return 1;
+
+
+
+}
