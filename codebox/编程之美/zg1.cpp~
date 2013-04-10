@@ -1,0 +1,42 @@
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+typedef struct node{
+  string a;
+  string b;
+}node;
+int main(){
+  vector<node> cache;
+  vector<string> l;
+  int T;
+  cin>>T;
+  while(T--){
+    int n,m;
+    cin>>n>>m;
+    for(int i=0;i<m;i++){
+      node temp;
+      cin>>temp.a>>temp.b;
+      cache.push_back(temp);
+    }
+    for(int i=0;i<n;i++){
+      string temp;
+      cin>>temp;
+      l.push_back(temp);
+    }
+    for(int i=0;i<m;i++){
+      for(int j=0;j<n;j++){
+	if(l[j]==cache[i].a)
+	  l[j]=cache[i].b;
+      }
+    }
+    for(int i=0;i<n;i++){
+      if(i==0)
+	cout<<l[j];
+      else
+	cout<<" "<<l[j];
+    }
+    cout<<endl;
+  }
+  return 1;
+}

@@ -1,0 +1,44 @@
+#include<iostream>
+#include<stdio.h>
+#define MAXINT 0x7fffffff
+using namespace std;
+int dp[1000][1000];
+int main(){
+  int T;
+  cin>>T;
+  while(T--){
+    int isout=0;
+    int n,k,d,s;
+    int pre=0;
+    scanf("%d %d %d %d",&n,&k,&d,&s);
+    for(int i=0;i<k;i++){
+      for(int j=0;j<n;j++){
+	dp[i][j]=MAXINT;
+      }
+    }
+    for(int j=0;j<=n;j++){
+      dp[0][j]=0;
+    }
+    for(int i=1;i<=k;i++){
+      int time,z;
+      scanf("%d %d",&time,&z);
+      if(time>s){
+	printf("%d\n",dp[i][0]);
+	isout=1;
+	break;
+      }
+      for(int j=0;j<=n;j++){
+	int carpay=0;
+	for(int k=0;k<=z;k++){
+	  if(k>=1)
+	    carpay=d;
+	  dp[i][j]=min(dp[i][j],dp[i-1][j+k]+(j+k)*(time-pre)+carpay);
+	}
+
+      }
+      pre=time;
+    }
+    if(!isout)
+      printf("%d\n",dp[k][0]);
+  }
+}

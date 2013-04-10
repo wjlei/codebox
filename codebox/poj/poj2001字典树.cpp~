@@ -1,0 +1,115 @@
+ #include<iostream>
+#include<stdio.h>
+#include<string>
+using namespace std;
+class node{
+public:
+  node(char in){
+    for(int i=0;i<100;i++)
+      next[i]=NULL;
+    count=0;
+    m=in;
+  }
+  char m;
+  class node* next[100];
+  int count;
+};
+void maketree(node *root,string ss){
+  
+  if(ss.size()==0)
+    return;
+  if(root==NULL){
+    root=new node('*');
+  }
+  node *temp=root;
+  for(int si=0;si<ss.size();si++){
+    if(temp->next[ss[si]-'a']==NULL){
+      temp->next[ss[si]-'a']=new node(ss[si]);
+      temp->next[ss[si]-'a']->count++;
+    }
+    else{
+      temp->next[ss[si]-'a']->count++;
+    }
+    temp= temp->next[ss[si]-'a'];
+  }
+}
+void printout(node *root,string s){
+  if(root==NULL)
+    return ;
+  node * temp=root;
+  for(int i=0;i<s.size();i++){
+    if(temp->next[s[i]-'a']->count==1)
+		cout<<temp->next[s[i]-'a']->m<<endl;
+    if(temp->next[s[i]-'a']!=NULL){
+		cout<<temp->next[s[i]-'a']->m<<endl;
+      temp=temp->next[s[i]-'a'];
+    }
+  }
+}
+int main(){
+  freopen("data","r",stdin);
+  string s;
+  string ss[1000];
+  int kk=0;
+  node* root=NULL;
+  while(cin>>s){
+    cout<<s<<endl;
+    maketree(root,s);
+    ss[kk++]=s;
+  }
+  for(int i=0;i<kk;i++){
+    printout(root,ss[i]);
+  }
+  //getchar();
+  return 0;
+}
+
+
+// #include<iostream>
+// using namespace std;
+// const int Max = 1002;
+// const int branchNum = 26;
+ 
+// struct tree_node{
+//   int count;   // 记录用到这个节点的单词数量，如果=1，则证明其为这个单词唯一的节点。
+//   tree_node *next[branchNum];
+// }root, node[20*Max];
+// int p = 0;
+ 
+// void insert(char *word){
+//   tree_node *location = &root;
+//   while(*word){
+//     if(location->next[*word-'a'] == NULL){
+//       node[p].count = 0;
+//       location->next[*word-'a'] = &node[p ++];
+//     }
+//     location = location->next[*word-'a'];
+//     location->count ++;
+//     word ++;
+//   }
+// }
+ 
+// void search(char *word){
+//   tree_node *location = &root;
+//   while(*word && location){
+//     if(location->count == 1) break;
+//     printf("%c", *word);
+//     location = location->next[*word-'a'];
+//     word ++;
+//   }
+//   printf("\n");
+// }
+ 
+// int main(){
+//   char word[Max][21];
+//   int i, k = 0;
+//   while(scanf("%s", word[k]) != EOF){
+//     insert(word[k]);
+//     k ++;
+//   }
+//   for(i = 0; i < k; i ++){
+//     printf("%s ", word[i]);
+//     search(word[i]);
+//   }
+//   return 0;
+// }
