@@ -18,6 +18,24 @@ void qsort(int num[],int left,int right){
     qsort(num,mid+1,right);
   }
 }
+int parti(int num[],int L,int R){
+  int v=num[L];
+  int i=L+1;int j=R;
+  while(1){
+    while(num[j]>v)//find j@num <= v;can't set"=",since j is the Axis
+      j--;
+    while(num[i]<=v){ //find i@num >v
+      if(i>=j)// !
+	break;
+      i++;
+    }
+    if(i>=j)
+      break;
+    swap(num[i],num[j]); //swap i,j
+  }
+  swap(num[j],v);//j is the Axis
+  return j;
+}
 int parti(int num[],int left,int right){
   int z=left;
   while(left<right){
