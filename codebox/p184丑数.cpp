@@ -1,3 +1,4 @@
+//dp开的数组太大
 #include<iostream>
 using namespace std;
 int imin(int number1,int number2,int number3){
@@ -19,14 +20,13 @@ int getuglynumber_solution2(int index){
     puglynumbers[nextuglyindex]=min;
     while(*pmultiply2*2<=puglynumbers[nextuglyindex])//下一个数大于新加的
       ++pmultiply2;
-    while(*pmultiply3*3<=puglynumbers[nextuglyindex])
+    while(*pmultiply3*3<=puglynumbers[nextuglyindex])//遍历保证*3(或2或5)大于新加的
       ++pmultiply3;
     while(*pmultiply5*5<=puglynumbers[nextuglyindex])
       ++pmultiply5;
     ++nextuglyindex;
   }
   int ugly=puglynumbers[nextuglyindex-1];
-  delete[]puglynumbers;
   return ugly;
 }
 int main(){
