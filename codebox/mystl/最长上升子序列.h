@@ -13,16 +13,31 @@ int bsearch(int x,int size, int num[]){
 	}
 	return l;
 }
+void print(int num[],int path[],int level,int start){
+  if(level==0)
+    return ;
+  int i=start;
+  while(b[i]!=level)
+    i--;
+  print(num,path,level-1,i-1);
+  cout<<a[i]<<endl;
+}
 int getlongestsubstring(int num[],int size){
 	int longest=1;
+	int path[max_len];//trace the num[i] get location P
+	int cache[max_len];//dp
+	cache[0]=num[0];
+	path[0]=1;
 	for(int i=1;i<size;i++){
-		int p=bsearch(num[i],longest,num);
-		num[p]=num[i];
+		int p=bsearch(num[i],longest,cache);
+		cache[p]=num[i];
+		b[i]=p;
 		if(p>longest-1){
 			longest++;
 		}
 
 	}
+	print(num,path,longest,size-1);
 	return longest;
 }
 ///编程之美原题
