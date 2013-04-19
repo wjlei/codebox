@@ -1,7 +1,7 @@
 int parti(int num[],int left,int right){
   int z=left;
   int i=left;
-  for(int j=left+1;j<right;j++){
+  for(int j=left+1;j<=right;j++){
     if(num[j]<=num[z]){//equal also move to left
       i++;//i and less than i is less or equal axis,so get the next one to change,i++ at the same time
       if(i!=j)
