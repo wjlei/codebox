@@ -1,4 +1,6 @@
 int parti(int num[],int left,int right){
+  if(num==NULL||left<0||right>=totallength)//exception
+    return -1;
   int z=left;
   int i=left;
   for(int j=left+1;j<right;j++){
@@ -12,10 +14,14 @@ int parti(int num[],int left,int right){
   return i;
 }
 void qsort(int num[],int left,int right){
+  if(num==NULL||left<0||right>=totallength)//exception
+    return ;
   if(left<right){
     int mid=parti(num,left,right);
-    qsort(num,left,mid-1);
-    qsort(num,mid+1,right);
+    if(mid>=0&&left<mid-1)//exception
+      qsort(num,left,mid-1);
+    if(mid>=0&&mid+1<right)//exception
+      qsort(num,mid+1,right);
   }
 }
 int parti(int num[],int L,int R){
