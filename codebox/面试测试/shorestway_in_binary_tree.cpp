@@ -19,21 +19,29 @@ int get=0;
 int findtheshortest(node*root,node*p1,node*p2){
   if(root==NULL)
     return -1;
-  if(root==p1||root==p2){
-    return 1;
-  }
   int leftdis=findtheshortest(root->left,p1,p2);
   int rightdis=findtheshortest(root->right,p1,p2);
-  if(leftdis<0&&rightdis<0)
-    return -1;
-  else if(leftdis>=0&&rightdis>=0){
-    get=1; 
-    return leftdis+rightdis;
+  if(root==p1||root==p2){
+    if(leftdis<0&&rightdis<0){
+      return 1;
+    }
+    else if((leftdis>=0&&rightdis<0)||(leftdis<0&&rightdis>=0)){
+      get=1; 
+      return leftdis>=0?leftdis:rightdis;
+    }
   }
   else if(get==1)
     return leftdis>=0?leftdis:rightdis;
-  else
-    return leftdis>=0?leftdis+1:rightdis+1;
+  else{
+    if(leftdis<0&&rightdis<0)
+      return -1;
+    else if(leftdis>=0&&rightdis>=0){
+      get=1; 
+      return leftdis+rightdis;
+    }
+    else
+      return leftdis>=0?leftdis+1:rightdis+1;
+  }
 
 }
 
@@ -42,7 +50,7 @@ int main(){
   node8.left=&node4;node8.right=&node12;
   node4.left=&node2;node4.right=&node6;node12.left=&node10;node12.right=&node14;
   node2.left=&node1;node2.right=&node3;node6.left=&node5;node6.right=&node7;node10.left=&node9;node10.right=&node11;node14.left=&node13;node14.right=&node15;
-  cout<<findtheshortest(&node8,&node3,&node10)<<endl;
+  cout<<findtheshortest(&node8,&node3,&node4)<<endl;
 
 
   system("pause");
