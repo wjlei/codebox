@@ -21,8 +21,8 @@ public class Add_Two_Numbers {
 			c = num / 10;
 			num = num % 10;
 			ans.next =new ListNode(num);
-			ans=ans.next;
-			p1=p1.next;p2=p2.next;
+			ans=ans.next;//update
+			p1=p1.next;p2=p2.next;//update
 		}
 		if(p1==null){
 			while (p2 != null) {
@@ -30,8 +30,8 @@ public class Add_Two_Numbers {
 				c = num / 10;
 				num = num % 10;
 				ans.next = new ListNode(num);
-				ans=ans.next;
-				p2=p2.next;
+				ans=ans.next;//update
+				p2=p2.next;//update
 			}
 		}
 		else if(p2==null){
@@ -40,8 +40,8 @@ public class Add_Two_Numbers {
 				c = num / 10;
 				num = num % 10;
 				ans.next = new ListNode(num);
-				ans=ans.next;
-				p1=p1.next;
+				ans=ans.next;//update
+				p1=p1.next;//update
 			}
 		}
 		if(c!=0){
