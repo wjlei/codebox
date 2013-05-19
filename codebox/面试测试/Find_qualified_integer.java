@@ -7,6 +7,8 @@ public class Find_qualified_integer {
 	// N=99,M=1122334455667789
 	// N*m=111111111111111111
 	static long find(int n) {
+		if(n==1)
+			return 1;
 		long dp[][] = new long[2][n];
 		long count = 1;
 		Arrays.fill(dp[0], Long.MAX_VALUE);
