@@ -1,13 +1,11 @@
 package main1;
 
-import java.util.Arrays;
-
-public class Jump_Game_II {
-    public static  int jump(int[] A) {
+public class Jump_Game {
+    public boolean canJump(int[] A) {
         // Start typing your Java solution below
         // DO NOT write main() function
     	if(A.length<=1)//greedy is good;
-    		return 0;
+    		return true;
     	int i=0;
     	int step=1;
     	int right=i+A[i];
@@ -21,20 +19,14 @@ public class Jump_Game_II {
     				right=j+A[j];
     			}
     		}
-    		if(!update){
-    			step=Integer.MAX_VALUE;
+    		if(!update)
     			break;
-    		}
     		i=index;
     		step++;
     	}
     	
-    	return step;
+    	return right==A.length-1;
         
     }
-    
-    public static void main(String args[]){
-    	int num[]={3,2,1,0,4};
-    	System.out.println(jump(num));
-    }
+
 }
