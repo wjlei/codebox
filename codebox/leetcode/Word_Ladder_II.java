@@ -1,0 +1,125 @@
+package main3;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
+
+
+
+
+public class Word_Ladder_II {
+
+    static   class node {
+	node(String in, int len, node ip) {
+	    ss = in;
+	    l = len;
+	    p = ip;
+	}
+	String ss;
+	int l;
+	node p;
+}
+
+    static    Queue<node> q;
+   static   ArrayList<ArrayList<String>> ans;
+   static    int minlen;
+   
+   static    public void makepath(node n){
+       ArrayList<String> path = new ArrayList<String>();
+       node p = n;
+       while(p != null){
+           path.add(0, p.ss);
+           p = p.p; 
+       }
+       ans.add(path);
+   }
+
+    static void solve(String end, HashSet<String> dict) {
+	int level=0;
+	Set<String> visited=new HashSet<String>();
+	Set<String> tempvisited=new HashSet<String>();
+	while (!q.isEmpty()) {
+	    node temp = q.poll();
+	    if(temp.l>level){
+		level=temp.l;
+		visited.addAll(tempvisited);
+		tempvisited.clear();
+	    }
+	    if (temp.l > minlen)
+		break;
+	    if (temp.ss.equals(end)) {
+		makepath(temp);
+		minlen = Math.min(minlen, temp.l);
+		continue;
+	    }
+	    HashSet<String> newset = neighbours.get(temp.ss);
+	    Set<String> remove=new HashSet<String>();
+	    if (newset != null && newset.size() > 0) {
+		for (String si : newset) {
+		    if (!visited.contains(si)) {
+			q.offer(new node(si, temp.l + 1, temp));
+			tempvisited.add(si);
+		    }
+		    else{
+			remove.add(si);
+		    }
+		}
+		newset.removeAll(remove);
+	    }
+	}
+
+    }
+   static   HashMap<String, HashSet<String>> neighbours;
+static   void calcNeighbours(String str, HashSet<String> dict) {
+       int length = str.length();
+       char [] chars = str.toCharArray();
+       for (int i = 0; i < length; i++) {
+           
+           char old = chars[i]; 
+           for (char c = 'a'; c <= 'z'; c++) {
+               if (c == old)  
+        	   continue;
+               chars[i] = c;
+               String newstr = new String(chars);                
+               if (dict.contains(newstr)) {
+                   HashSet<String> set = neighbours.get(str);
+                   if (set != null) {
+                       set.add(newstr);
+                   } else {
+                       HashSet<String> newset = new HashSet<String>();
+                       newset.add(newstr);
+                       neighbours.put(str, newset);
+                   }
+               }                
+           }
+           chars[i] = old;
+       }
+   }
+   
+ static  public ArrayList<ArrayList<String>> findLadders(String start, String end,HashSet<String> dict) {
+	// Start typing your Java solution below
+	// DO NOT write main() function
+	minlen = Integer.MAX_VALUE;
+	neighbours=new HashMap<String, HashSet<String>>();
+	ans = new ArrayList<ArrayList<String>>();
+	dict.add(end);
+	dict.add(start);
+	for(String s:dict)
+	   calcNeighbours(s,dict);
+	q = new LinkedList<node>();
+	q.offer(new node(start, 0, null));
+	solve(end, dict);
+	return ans;
+
+    }
+  static public void main(String args[]) {
+      HashSet<String> dict=new  HashSet<String>();
+      dict.add("hot");
+      dict.add("dog");
+      System.out.println(findLadders("hot","dog",dict));
+  }
+
+}
