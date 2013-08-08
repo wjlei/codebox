@@ -1,3 +1,75 @@
+package prepare;
+
+class ListNode
+{
+    int val;
+    ListNode next;
+    ListNode(int x)
+    {
+        val = x;
+        next = null;
+    }
+}
+public class reverse_kgroup {
+
+    static ListNode reverselist(ListNode head)
+    {
+        ListNode pre = null;
+        ListNode cur = head;
+        ListNode last = cur.next;
+        while (last != null)
+        {
+            cur.next = pre;
+            pre = cur;
+            cur = last;
+            last = last.next;
+        }
+        cur.next=pre;//!
+        return cur;
+
+    }
+    static ListNode reverseKGroup(ListNode head, int k)
+    {
+        if (head == null || head.next == null)
+            return head;
+        ListNode newhead=new ListNode(0);
+        newhead.next=head;//!
+        ListNode pre = newhead;
+        ListNode cur = head;
+        ListNode last = cur;
+        ListNode prelast = cur;
+        while (last != null)
+        {
+            for (int i = 0; i < k; i++)
+            {
+                if (last != null)
+                {
+                    prelast = last;
+                    last = last.next;
+                }
+                else
+                	return newhead.next;
+            }
+            prelast.next = null;
+            pre.next = reverselist(cur);
+            cur.next = last;
+            pre = cur;
+            cur = last;
+        }
+        return newhead.next;
+    }
+	public static void main(String args[]) {
+		ListNode head;
+		ListNode cur=new ListNode(1);
+		ListNode last=new ListNode(2);
+		head=cur;
+		cur.next=last;
+		reverseKGroup(head,2);
+		
+	}
+
+}
+
 package main;
 
 public class Reverse_Nodes_in_kGroup {
