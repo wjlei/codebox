@@ -62,11 +62,11 @@ int numberof12(const char* strn){
     return 1;
   int numfirstdigit=0;
   if(first>1)
-    numfirstdigit=powerbase10(length-1);
+    numfirstdigit=powerbase10(length-1);//如223，则有1xx，10*10个
   else if(first ==1)
-    numfirstdigit=atoi(strn +1)+1;
-  int numotherdigits=first*(length-1)*powerbase10(length-2);
-  int numrecursive = numberof12(strn+1);
+    numfirstdigit=atoi(strn +1)+1;//如123，1开头有23+1(0)＝24个
+  int numotherdigits=first*(length-1)*powerbase10(length-2);//以123（1xx）为例，xx中1x和x1 都有10个所以2*10个
+  int numrecursive = numberof12(strn+1);//递归
   return numfirstdigit+numotherdigits+numrecursive;
 }
 int numberof1between1andn2(int n){
