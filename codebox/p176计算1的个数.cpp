@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 using namespace std;
-void addone(string &cnum,int cur){
-  if(cur==0){
+void addone(string &cnum,int cur){//cnum[cur-1]为最低位
+  if(cur==0){//最高位时，加1
 	  cnum="1"+cnum;return ;
   }
   if(cnum[cur-1]=='9'){
@@ -25,7 +25,7 @@ int count1(string input){
 			if(z[i]=='1')
 				sum++;
 		}
-		addone(z,z.size());
+		addone(z,z.size());//一个一个的遍历，计算有几个1
 	}
 	return sum;
 }
@@ -42,7 +42,7 @@ int numberof1(unsigned int n){
 int numberof1between1andn(unsigned int n){
   int number =0;
   for(unsigned int i=1;i<=n;++i)
-    number+=numberof1(i);
+    number+=numberof1(i);//一个一个的遍历，计算有几个1
   return number;
 }
 int powerbase10(unsigned int n){
