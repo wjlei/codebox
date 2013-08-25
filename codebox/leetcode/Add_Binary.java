@@ -1,6 +1,27 @@
 package main2;
 
 public class Add_Binary {
+    
+    public static String addBinary(String a, String b) {
+		String ans="";
+		int la=a.length()-1;
+		int lb=b.length()-1;
+		int base=0;
+		int carry=0;
+		while(la>=0||lb>=0){
+			int numa=la>=0?a.charAt(la)-'0':0;
+			int numb=lb>=0?b.charAt(lb)-'0':0;
+			base=numa+numb+carry;
+			carry=base/2;
+			base=base%2;
+			ans=(char)(base+'0')+ans;
+			la=la>=0?la-1:la;
+			lb=lb>=0?lb-1:lb;
+		}
+		if(carry>0)
+			ans=(char)(carry+'0')+ans;
+		return ans;
+	}
 
     public static String addBinary(String a, String b) {
         // Start typing your Java solution below
