@@ -8,7 +8,7 @@ public class Next_Permutation {
 	    return;
 	int i = 0;
 	boolean isfind = false;
-	for (i = num.length - 2; i >= 0; i--) {
+	for (i = num.length - 2; i >= 0; i--) {//find two num in order
 	    if (num[i] < num[i + 1]) {
 		isfind = true;
 		break;
@@ -16,7 +16,7 @@ public class Next_Permutation {
 	}
 	if (isfind) {
 	    int j = 0;
-	    for (j = num.length - 1; j >= 0; j--) {
+	    for (j = num.length - 1; j >= 0; j--) {//from the end to get a num bigger 
 		if (num[i] < num[j]) {
 		    break;
 		}

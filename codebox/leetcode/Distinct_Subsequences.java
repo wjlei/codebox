@@ -6,14 +6,14 @@ public class Distinct_Subsequences {
         // DO NOT write main() function
 	int m=T.length()+1;
 	int n=S.length()+1;
-	int dp[][]=new int[m][n];
+	int dp[][]=new int[m][n];//stand for how many way to get T, same mean 0-j char can make how many 0-i
 	for(int j=0;j<n;j++){
 	    dp[0][j]=1;
 	}
 	for(int i=1;i<m;i++){
 	    for(int j=1;j<n;j++){
 		if(T.charAt(i-1)==S.charAt(j-1)){
-		    dp[i][j]=dp[i][j-1]+dp[i-1][j-1];
+		    dp[i][j]=dp[i][j-1]+dp[i-1][j-1];//only dp[i-1][j-1]is available we can godp[i][j]
 		}
 		else{
 		    dp[i][j]=dp[i][j-1];
