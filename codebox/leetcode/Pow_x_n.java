@@ -20,6 +20,8 @@ public class Pow_x_n {
 	
 	
     public double pow(double x, int n) {
+    	if(abs(x-0)<0.0000001&&n<0)
+    	     invalid
     	//n 负数
     	if(n<0){
     		double ans= solve(x,n);
