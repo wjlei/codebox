@@ -12,7 +12,7 @@ public class Remove_Element {
     			A[j++]=A[i];
     		}
     	}
-    	return j+1;
+    	return j;
     	
         
     }
