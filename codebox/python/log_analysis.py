@@ -25,7 +25,7 @@ def analisysfile(file):
     try :
         for line in input:
             if line.find('serialNumber')!=-1:
-                sn=re.search('serialNumber *: *(\d)',line).group(1);
+                sn=re.search('serialNumber *: *(\d+)',line).group(1);
                 #ts=datetime.datetime.strptime('2013-11-06 15:00:18.429','%Y-%m-%d %H:%M:%S.%f')
                 #print(ts.strftime('%Y-%m-%d %H:%M:%S.%f'))
                 ts=datetime.datetime.strptime(re.search('(\d+-*)+ (\d+:*)+.\d+',line).group(0),'%Y-%m-%d %H:%M:%S.%f');
@@ -37,20 +37,26 @@ def analisysfile(file):
                     a=dic[int(sn)];
                     a.sts=ts;a.sline=line;
         for i in range(0,len(dic)-1):
-            output.write(dic[i].rline);
-            output.write(dic[i].sline);
+            if(dic[i].rline!=None):
+                output.write(dic[i].rline);
+            else:
+                output.write('missing');
+            if(dic[i].sline!=None):
+                output.write(dic[i].sline);
+            else:
+                output.write('missing\n');
         sum=0;
         count=0;
         for i in range(0,len(dic)-1):
             if dic[i].sts!=None and dic[i].rts!=None:
                 sum+=(dic[i].sts-dic[i].rts).microseconds;
-                print(sum);
                 count+=1;
-        print(sum/count)
+        if(count!=0):
+            print(sum/count)
     finally:
         input.close();
         output.close();
-        print('done');
+        print('processing');
 
 logdir='/Users/wjlei/testdata/log';
 filelist=os.listdir(logdir);
@@ -59,4 +65,5 @@ today='20131106';
 for filename in filelist:
     if filename.find(today)!=-1 and filename.find('result')==-1:
         analisysfile(logdir+'/'+filename);
+print('done');
     
