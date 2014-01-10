@@ -44,18 +44,21 @@ def analisysfile(file):
                         a.sn=int(sn);a.sts=ts;a.sline=line;
                         dic[int(sn)]=a;
         for i in range(0,len(dic)-1):
-            if(dic[i].rline!=None):
-                output.write(dic[i].rline);
+            if(dic.has_key(i)):
+                if(dic[i].rline!=None):
+                    output.write(dic[i].rline);
+                else:
+                    output.write('missing\n');
+                if(dic[i].sline!=None):
+                    output.write(dic[i].sline);
+                else:
+                    output.write('missing\n');
             else:
-                output.write('missing\n');
-            if(dic[i].sline!=None):
-                output.write(dic[i].sline);
-            else:
-                output.write('missing\n');
+                output.write(str(i)+'   packet_missing\n');
         sum=0;
         count=0;
         for i in range(0,len(dic)-1):
-            if dic[i].sts!=None and dic[i].rts!=None:
+            if dic.has_key(i) and dic[i].sts!=None and dic[i].rts!=None:
                 sum+=(dic[i].sts-dic[i].rts).microseconds;
                 count+=1;
         if(count!=0):
@@ -75,5 +78,3 @@ for filename in filelist:
     if filename.find(today)!=-1 and filename.find('result')==-1:
         analisysfile(logdir+'/'+filename);
 print('done');
-    
-
