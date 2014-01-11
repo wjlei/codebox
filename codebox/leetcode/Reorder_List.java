@@ -1,45 +1,45 @@
 package main;
 
 public class Reorder_List {
-	public void reorderList(ListNode head) {
+	public static void reorderList(ListNode head) {
 		if(head==null||head.next==null)
 			return ;
 		ListNode odd=head;
 		ListNode oddcur=odd;
-		ListNode even=head.next;
-		ListNode evencur=even;
-		int count=3;
-		for(ListNode cur=head.next.next;cur!=null;cur=cur.next){
-			if(count%2==1){
-				oddcur.next=cur;
-				oddcur=cur;
+		ListNode even=null;
+		ListNode evencur=head.next;
+		int count=0;
+		while(true){
+			if(evencur==null||evencur.next==null){
+				even=oddcur.next;
+				break;
 			}
-			else{
-				evencur.next=cur;
-				evencur=cur;
-			}
-			count++;
+			oddcur=oddcur.next;
+			evencur=evencur.next.next;
 		}
-		oddcur.next=null;evencur.next=null;
+		oddcur.next=null;
 		ListNode pre=null,cur=even,last=even.next;
-		while(last!=null){
+		while(cur!=null){
 			cur.next=pre;
 			pre=cur;
 			cur=last;
-			last=last.next;
+			if(last!=null)
+				last=last.next;
 		}
+		even=pre;
 		cur=head;
 		count=2;
-		while(odd!=null&&even!=null){
+		odd=odd.next;
+		while(odd!=null||even!=null){
 			if(count%2==1){
 				cur.next=odd;
-				odd=odd.next;
 				cur=odd;
+				odd=odd.next;
 			}
 			else{
 				cur.next=even;
-				even=even.next;
 				cur=even;
+				even=even.next;
 			}
 			count++;
 		}
@@ -47,6 +47,13 @@ public class Reorder_List {
 
     }
     public static void main(String args[]) {
+    	ListNode head=new ListNode(1);
+    	head.next=new ListNode(2);
+    	head.next.next=new ListNode(3);
+    	reorderList(head);
+    	for(ListNode cur=head; cur!=null;cur=cur.next){
+    		System.out.println(cur.val);
+    	}
 
     }
 
