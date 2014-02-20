@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:paddingLeft="8dip"
+  android:paddingRight="12dip"
+  android:paddingTop="2dip"
+  android:paddingBottom="1dip"
+  android:background="@drawable/search_progress_bar_background">
+
+	<ProgressBar android:id="@+id/progress_bar"
+		style="?android:attr/progressBarStyleHorizontal" android:layout_width="fill_parent"
+		android:layout_height="5dip" android:layout_marginLeft="1dip"
+		android:max="100" />
+</LinearLayout>

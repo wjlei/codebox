@@ -1,0 +1,7 @@
+.circle {
+    background: none repeat scroll 0 0 #FF3300;
+    border-radius: 78.5px 78.5px 78.5px 78.5px;
+    color: #FFFFFF;
+    padding:44px 50px;
+    position: absolute;
+}

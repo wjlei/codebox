@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<title>Footprint Sniff</title>
+<meta http-equiv="pragma" content="no-cache"></meta>
+<link type="text/css" rel="stylesheet" href="css/istyle.css" />
+<script src="scripts/ini.js" type="text/javascript"></script>
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/scrollpagination.js"></script>
+<script type="text/javascript" src="scripts/cookieio.js"></script>
+<script type="text/javascript" src="scripts/loginout.js"></script>
+<script type="text/javascript" src="scripts/friend.js"></script>
+</head>
+
+<body>
+	<div id="form1" class="div"  ></div>
+<div id="overview" class="div" > <a href="postcard.html"><img src="./img/postcards.png" alt="postcards"/></a></div>
+	<div id="friends" class="div"  ></div>
+	<div id="divcontent">
+	   <ul id="content">
+	   </ul>
+	</div>
+	<div class="loading" id="loading">加载中</div>
+	<div class="loading" id="nomoreresults">更多.....</div>
+
+ <script language="JavaScript">
+	var urlinfo = window.location.href; 
+	var len = urlinfo.length;
+	var offset = urlinfo.indexOf("?");
+	var newsidinfo = urlinfo.substr(offset, len);
+	var temp=newsidinfo.split("&")[0]
+	var usr =temp.split("=")[1];
+	temp=newsidinfo.split("&")[1];
+	var usrid =temp.split("=")[1];
+	var ismyroom=1;
+	makelogbar();
+	SetCookie("maxid", 0);
+
+</script>
+ <script language="JavaScript">
+checkfriend(usrid);
+
+</script>
+<script type="text/javascript">
+	$(function() {
+		$('#content').scrollPagination({
+			'contentPage' : 'tcontent.html', // the page where you are searching for results
+			'contentData' : {}, // you can pass the children().size() to know where is the pagination
+			'scrollTarget' : $(window), // who gonna scroll? in this example, the full window
+			'heightOffset' : 10, // how many pixels before reaching end of the page would loading start? positives numbers only please
+			'beforeLoad' : function() { // before load, some function, maybe display a preloader div
+				$('#loading').fadeIn();
+			},
+			'afterLoad' : function(elementsLoaded) { // after loading, some function to animate results and hide a preloader div
+				$('#loading').fadeOut();
+				var i = 0;
+				$(elementsLoaded).fadeInWithDelay();
+				if ($('#content').children().size() > 100) { // if more than 100 results loaded stop pagination (only for test)
+					$('#nomoreresults').fadeIn();
+					$('#content').stopScrollPagination();
+				}
+			}
+		});
+
+		// code for fade in element by element with delay
+		$.fn.fadeInWithDelay = function() {
+			var delay = 0;
+			return this.each(function() {
+				$(this).delay(delay).animate({
+					opacity : 1
+				}, 200);
+				delay += 100;
+			});
+		};
+
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, BrowserActivity!</string>
+    <string name="app_name">MyBrowser</string>
+    <string name="new_web_page">New web page</string>
+    <string name="search_websites">Search websites</string>
+    <string name="url_error">输入的网址有误，请重新输入！</string>
+    <string name="default_google_url">http://www.google.com.hk/</string>
+	<string name="default_ucweb_url">http://www.uc.cn/</string>
+	<string name="set_default_url">Set Default URL</string>
+	<string name="ok">OK</string>
+	<string name="cancel">Cancel</string>
+	<string name="dialog_title"> 请输入默认主页网址</string>
+	<string name="download_sdcard_busy_dlg_title">SD card unavailable</string>
+    <string name="download_sdcard_busy_dlg_msg">The SD card is busy. To allow downloads, select \"Turn off USB storage\" in the notification.</string>
+	<string name="download_no_sdcard_dlg_msg">An SD card is required to download</string>
+    <string name="download_no_sdcard_dlg_title">SD card unavailable</string>
+    <string name="net_error">网络错误！</string>
+    <string name="page_is_loading">Page is loading...</string>
+    <string name="file_is_loading">File is loading...</string>
+</resources>

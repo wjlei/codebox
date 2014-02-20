@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<title>Footprint Sniff</title>
+<meta http-equiv="pragma" content="no-cache"></meta>
+<link type="text/css" rel="stylesheet" href="css/istyle.css" />
+<script src="scripts/ini.js" type="text/javascript"></script>
+<script type="text/javascript" src="scripts/cookieio.js"></script>
+<script type="text/javascript" src="scripts/map.js"></script>
+<script type="text/javascript" src="scripts/loginout.js"></script>
+<script type="text/javascript" src="scripts/friend.js"></script>
+<script type="text/javascript" src="scripts/catchhtml.js"></script>
+</head>
+
+<body>
+<div id="form1" class="div"  ></div>
+<div id="overview" class="div" > <a href="postcard.html"><img src="./img/postcards.png" alt="postcards"/></a></div>
+	<div id="friends" class="div"  ></div>
+	<div id="divcontent">
+	<ul id="content">
+	</ul>
+	</div>
+
+<script language="JavaScript">
+    makelogbar();
+</script>
+<script language="JavaScript">
+	var PAGE_SUCCESS = 200;
+	var urlinfo = window.location.href;
+	var len = urlinfo.length;
+	var offset = urlinfo.indexOf("?");
+	var newsidinfo = urlinfo.substr(offset, len);
+	var picid = newsidinfo.split("=")[1];
+	var param = "picid=" + picid;
+	var requestObject = xmlHttpRequestHandler.createXmlHttpRequest();
+	requestObject.open("Get", "godetail?" + param, false);
+	requestObject.send(null);
+	if (requestObject.status == PAGE_SUCCESS) {
+		if (requestObject.responseText != "-1") {
+			var div_handle = document.getElementById("content");
+			if (div_handle) {
+				div_handle.innerHTML = requestObject.responseText;
+			}
+		} else
+			alert("sth error!");
+	} else {
+		alert("Request failed");
+	}
+</script>
+ <script language="JavaScript">
+    checkpicfriend(picid);
+</script>
+</body>
+</html>

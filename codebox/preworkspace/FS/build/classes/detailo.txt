@@ -1,0 +1,126 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.*;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class detailo extends HttpServlet {
+	private static final String CONTENT_TYPE = "text/html; charset=GBK";
+	private static String driver = "com.mysql.jdbc.Driver";
+	private static String url = "jdbc:mysql://10.108.120.210:3306/FS";
+	private static String user = "root";
+	private static String password = "112357";
+	private String picid;
+
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+	}
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		picid = request.getParameter("picid");
+
+		// 加载驱动程序
+		try {
+			try {
+				Class.forName(driver);
+			} catch (ClassNotFoundException e) {
+				System.out.println("Sorry,can`t find the Driver!");
+				e.printStackTrace();
+			}
+
+			Connection conn1 = DriverManager.getConnection(url, user, password);
+
+			if (!conn1.isClosed())
+				System.out.println("Succeeded connecting to the Database!");
+			Statement statement1 = conn1.createStatement();
+			Statement statement3 = conn1.createStatement();
+			// 要执行的SQL语句
+
+			String sql = "select * from FP,user where user.usrid=FP.usrid && FP.picid='" + picid+"'";
+			System.out.println(sql);
+			ResultSet rs = statement1.executeQuery(sql);
+			String ss = "";
+			while (rs.next()) {
+                String name=rs.getString("name");
+                String usrid=rs.getString("usrid");
+				ss += "<div class=\"pin\" data-id=\"193232640232029959\"> <table class=\"FS\"><tbody><tr><td class=\"FS_image\">";
+				ss += "<a href=\"myhome.html?user=" + name + "&id=" + usrid
+						+ "\">";
+				String ipic = rs.getString("ipic");
+				String ialt = rs.getString("alt");
+				ss += "<img src=\"./Pinterest   Home_files/" + ipic
+						+ "\" alt=\"" + ialt
+						+ "\"></a> </td></tbody></table><div class=\"image\">";
+				String picid = rs.getString("picid");
+				String alt = rs.getString("alt");
+				String picurl = rs.getString("picurl");
+				ss += "<a class=\"preload\" href=\"detail.html?picid=" + picid
+						+ "\"><img alt=\"" + alt
+						+ "\" src=\"./Pinterest   Home_files/" + picurl
+						+ "\"></a>";
+				ss += "</div>";
+				String title1 = rs.getString("title1");
+				ss += "<p class=\"FS_description\">" + title1 + "</p>";
+				String pubtime = rs.getString("pubtime");
+				String method = rs.getString("method");
+				ss += "<p class=\"pin_source\">" + pubtime
+						+ "<span class=\"pin_method\">" + method
+						+ "</span></p>";
+				String px=rs.getString("px");
+				String py=rs.getString("py");
+				ss+="<div class=\"map\" id=\"getmap\"></div>";//new
+				ss+="<u><font color=\"red\"><div class=\"location\" id=\"location\"  onclick=\"showmap();\">"+px+","+py+"</div></font> </u>";//new
+				ss += "<div class=\"FS_comments\" style=\"display: block\"> <table> <tbody><tr> <td class=\"icon\"></td> <td class=\"comment_text\">";
+				// comment
+				sql = "SELECT name,comment.usrid,content from FP,comment,user where FP.picid=comment.picid&&user.usrid=comment.usrid && FP.picid='"
+						+ picid + "'";
+				System.out.println(sql);
+				ResultSet rs3 = statement3.executeQuery(sql);
+				String cc = "";
+				while (rs3.next()) {
+					String name1 = rs3.getString("name");
+					String usrid1 = rs3.getString("usrid");
+					String content = rs3.getString("content");
+					cc += "<p> <a class=\"link\" href=\"myhome.html?user="
+							+ name1 + "&id=" + usrid1 + "\">" + name1
+							+ "</a><span>";
+					cc += content + "</span></p>";
+
+				}
+				rs3.close();
+				ss += cc;
+				ss += "</td></tr></tbody></table></div>";
+				String numlike = rs.getString("numlike");
+				ss += "<div class=\"pin_stats\"><div class=\"pin_likes\" style=\"display: block;\"><div class=\"icon\"></div><span>"
+						+ numlike
+						+ " likes </span></div><div class=\"pin_repins\" style=\"display: block;\">";
+				String numrepub = rs.getString("numrepub");
+				ss += " <div class=\"icon\"></div><span>" + numrepub
+						+ " repubs </span></div></div></div>";
+
+			}
+			response.setContentType(CONTENT_TYPE);
+			PrintWriter out = response.getWriter();
+			out.println(ss);
+			System.out.println(ss);
+			out.close();
+			rs.close();
+			conn1.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

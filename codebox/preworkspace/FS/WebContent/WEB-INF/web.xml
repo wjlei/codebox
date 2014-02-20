@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="GBK"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <servlet>
+    <servlet-name>gocheck</servlet-name>
+    <servlet-class>cn.bupt.FS.check</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>gocheck</servlet-name>
+    <url-pattern>/gocheck</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>godatatouch</servlet-name>
+    <servlet-class>cn.bupt.FS.datatouch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>godatatouch</servlet-name>
+    <url-pattern>/godatatouch</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>godetail</servlet-name>
+    <servlet-class>cn.bupt.FS.detail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>godetail</servlet-name>
+    <url-pattern>/godetail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>gomaptouch</servlet-name>
+    <servlet-class>cn.bupt.FS.maptouch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>gomaptouch</servlet-name>
+    <url-pattern>/gomaptouch</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>gofriendcheck</servlet-name>
+    <servlet-class>cn.bupt.FS.friendcheck</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>gofriendcheck</servlet-name>
+    <url-pattern>/gofriendcheck</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>login.html</welcome-file>
+  </welcome-file-list>
+</web-app>

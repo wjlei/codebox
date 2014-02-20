@@ -1,0 +1,14 @@
+function sc2(){//正中
+ document.getElementById("form1").style.top=(document.body.scrollTop)+"px";
+ document.getElementById("form1").style.left=(document.body.scrollLeft+(document.documentElement.clientWidth-document.getElementById("form1").offsetWidth)/2)+"px";
+}
+function sc5(){//右下
+	 document.getElementById("overview").style.top=(document.body.scrollTop+document.documentElement.clientHeight-document.getElementById("overview").offsetHeight)+"px";
+	 document.getElementById("overview").style.left=(document.body.scrollLeft+document.documentElement.clientWidth-document.getElementById("overview").offsetWidth)+"px";
+	}
+function scall(){
+	 sc2();
+}
+function scall25(){
+	 sc2();sc5();
+}
