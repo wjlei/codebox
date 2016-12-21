@@ -1,0 +1,2 @@
+SET ipath=D:\Zodiac-src\private\Zodiac\Examples\TestFramework\unittestCpp
+C:\Users\jiweng\AStyle_2.04_windows\AStyle\bin\AStyle.exe --style=allman -p --min-conditional-indent=0 --max-code-length=120 --align-pointer=type --max-instatement-indent=120 --indent-namespaces --unpad-paren --recursive %ipath%\*.cpp  %ipath%\*.h %ipath%\*.hpp
